@@ -1,0 +1,47 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Deploying the API-Gateway in GCP
+
+# Controls when the workflow will run
+on:
+  push:
+    branches:
+      - "main"
+#       - "development"
+      - "staging"
+      
+  # Allows you to run this workflow manually from the Actions tab
+  #workflow_dispatch:
+  
+env:
+  DEV_PROJECT_ID: gcp-provisioning-framework # TODO: update Google Cloud project id
+  STAGE_PROJECT_ID:  test-project # TODO: update Google Cloud project id
+  PROD_PROJECT_ID:  test-project # TODO: update Google Cloud project id
+  API_NAME-DEV: sow-app-auth # TODO: update Cloud Run service name
+  REGION: us-east4 # TODO: update Cloud Run service region
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  Dev_deploy:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/development'
+    steps:
+      - name: Checkout
+        uses: 'actions/checkout@v3'
+#       NOTE: Alternative option - authentication via credentials json
+      - name: 'Google Auth'
+        id: 'auth'
+        uses: 'google-github-actions/auth@v0'
+        with:
+          credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+
+      # Runs a set of commands using the runners shell
+      - name: Run a multi-line script
+        run: |
+            # make file runnable, might not be necessary
+             chmod +x "${GITHUB_WORKSPACE}/.github/gcp-apigateway-build.sh"
+            # Run the script for deployment 
+             bash -x ${GITHUB_WORKSPACE}/.github/gcp-apigateway-build.sh ${{ env.DEV_PROJECT_ID }} ${{ env.API_NAME-DEV }} 
+           
+
+             
