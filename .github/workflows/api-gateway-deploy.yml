@@ -33,7 +33,7 @@ jobs:
         id: 'auth'
         uses: 'google-github-actions/auth@v0'
         with:
-          credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+          credentials_json: '${{ secrets.GCP_CREDENTIALS_API }}'
 
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
