@@ -6,7 +6,7 @@
 PROJECT_ID=$1
 API_NAME=$2
 CONFIG_FILE=$3
-COPY . ./
+
 #Enable required APIs in Cloud Shell, run the following commands to enable the required service
 gcloud config set project $PROJECT_ID
 gcloud services enable container.googleapis.com
