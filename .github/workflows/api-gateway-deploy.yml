@@ -39,9 +39,9 @@ jobs:
       - name: Run a multi-line script
         run: |
             # make file runnable, might not be necessary
-             chmod +x "${GITHUB_WORKSPACE}/.github/gcp-apigateway-build.sh"
+             chmod +x "${GITHUB_WORKSPACE}/gcp-apigateway-build.sh"
             # Run the script for deployment 
-             bash -x ${GITHUB_WORKSPACE}/.github/gcp-apigateway-build.sh ${{ env.DEV_PROJECT_ID }} ${{ env.API_NAME-DEV }} 
+             bash -x ${GITHUB_WORKSPACE}/gcp-apigateway-build.sh ${{ env.DEV_PROJECT_ID }} ${{ env.API_NAME-DEV }} 
            
 
              
