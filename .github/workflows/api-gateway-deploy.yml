@@ -7,14 +7,14 @@ on:
   push:
     branches:
       - "main"
-#       - "development"
+      - "development"
       - "staging"
       
   # Allows you to run this workflow manually from the Actions tab
   #workflow_dispatch:
   
 env:
-  DEV_PROJECT_ID: gcp-provisioning-framework # TODO: update Google Cloud project id
+  DEV_PROJECT_ID: grand-aileron-341717 # TODO: update Google Cloud project id
   STAGE_PROJECT_ID:  test-project # TODO: update Google Cloud project id
   PROD_PROJECT_ID:  test-project # TODO: update Google Cloud project id
   API_NAME-DEV: sow-app-auth # TODO: update Cloud Run service name
@@ -24,7 +24,7 @@ env:
 jobs:
   Dev_deploy:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/development'
+    if: github.ref == 'refs/heads/main'
     steps:
       - name: Checkout
         uses: 'actions/checkout@v3'

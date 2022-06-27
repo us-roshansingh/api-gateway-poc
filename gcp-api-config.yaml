@@ -1,6 +1,6 @@
     swagger: "2.0"
     info:
-      title: gcpcmsauth
+      title: sow-app-auth
       description: "For authentication from OneCloud Portal team"
       version: "1.0.0"
     schemes:
@@ -15,10 +15,10 @@
     paths:
       /cmsapp:
          post:
-          description: "CMS for Policy binding based on defined roles"
+          description: "SOW Provision framework"
           operationId: policybind
           x-google-backend:
-            address: https://cms-oakbzd4pxq-uk.a.run.app
+            address: https://onecloud-fastapi-jimqnwvhsa-uk.a.run.app
           security:
             - api_key : []
           
