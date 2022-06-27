@@ -23,7 +23,7 @@ gcloud api-gateway api-configs create gcp-pov-api-config --api=$API_NAME --opena
 gcloud api-gateway gateways create gcp-pov-api-gateway --api=$API_NAME --api-config=gcp-sow-api-config --location=us-east4 --project=$PROJECT_ID
 
 #run the below commands to view details about the gateway
-gcloud api-gateway gateways describe gcp-pov-api-gateway --location=us-east4 --project=$PROJECT_ID
+gcloud api-gateway gateways describe gcp-pov-api-gateway-new --location=us-east4 --project=$PROJECT_ID
 
 #Enable the created api in API & Service page
 #MANAGED_SERVICE_NAME=$(gcloud api-gateway apis describe gcpcmsauth --format="value(managedService)")
