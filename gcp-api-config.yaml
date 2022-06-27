@@ -13,7 +13,7 @@
           name: "key"
           in: "query"
     paths:
-      /cmsapp:
+      /resource-manager/project:
          post:
           description: "SOW Provision framework"
           operationId: projectProvision
