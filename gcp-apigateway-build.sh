@@ -17,10 +17,10 @@ gcloud services enable servicecontrol.googleapis.com
 gcloud services enable iap.googleapis.com
 
 #Create the API gateway config by running the following command
-gcloud api-gateway api-configs create gcp-pov-api-config --api=$API_NAME --openapi-spec=$CONFIG_FILE --project=$PROJECT_ID
+gcloud api-gateway api-configs create gcp-api-config --api=$API_NAME --openapi-spec=$CONFIG_FILE --project=$PROJECT_ID
 
 #deploy the API config to a gateway, run the below command
-gcloud api-gateway gateways create gcp-pov-api-gateway --api=$API_NAME --api-config=gcp-sow-api-config --location=us-east4 --project=$PROJECT_ID
+gcloud api-gateway gateways create gcp-pov-api-gateway-new --api=$API_NAME --api-config=gcp-api-config --location=us-east4 --project=$PROJECT_ID
 
 #run the below commands to view details about the gateway
 gcloud api-gateway gateways describe gcp-pov-api-gateway-new --location=us-east4 --project=$PROJECT_ID
