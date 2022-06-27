@@ -20,7 +20,7 @@ gcloud services enable iap.googleapis.com
 gcloud api-gateway api-configs create gcp-cms-api-config --api=$API_NAME --openapi-spec=$CONFIG_FILE --project=$PROJECT_ID
 
 #deploy the API config to a gateway, run the below command
-gcloud api-gateway gateways create gcp-cms-api-gateway --api=$API_NAME --api-config=gcp-cms-api-config --location=us-east4 --project=$PROJECT_ID
+gcloud api-gateway gateways create gcp-cms-api-gateway --api=$API_NAME --api-config=gcp-cms-api-config-new --location=us-east4 --project=$PROJECT_ID
 
 #run the below commands to view details about the gateway
 gcloud api-gateway gateways describe gcp-cms-api-gateway --location=us-east4 --project=$PROJECT_ID
