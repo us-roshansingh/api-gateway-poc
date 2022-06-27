@@ -18,7 +18,7 @@ env:
   STAGE_PROJECT_ID:  test-project # TODO: update Google Cloud project id
   PROD_PROJECT_ID:  test-project # TODO: update Google Cloud project id
   API_NAME-DEV: sow-app-auth # TODO: update Cloud Run service name
-  CONFIG_FILE: gcp-api-config-new.yaml # TODO: update Cloud Run service region
+  CONFIG_FILE: gcp-api-config.yaml # TODO: update Cloud Run service region
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
