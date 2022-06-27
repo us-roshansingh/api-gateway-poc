@@ -33,7 +33,7 @@
       /resource-manager/project/label:
          post:
           description: "SOW Provision framework"
-          operationId: projectProvision
+          operationId: labelProvision
           x-google-backend:
             address: https://onecloud-fastapi-canlcqfcea-uk.a.run.app
           security:
