@@ -16,7 +16,7 @@
       /cmsapp:
          post:
           description: "SOW Provision framework"
-          operationId: policybind
+          operationId: projectProvision
           x-google-backend:
             address: https://onecloud-fastapi-jimqnwvhsa-uk.a.run.app
           security:

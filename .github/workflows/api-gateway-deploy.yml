@@ -18,7 +18,7 @@ env:
   STAGE_PROJECT_ID:  test-project # TODO: update Google Cloud project id
   PROD_PROJECT_ID:  test-project # TODO: update Google Cloud project id
   API_NAME-DEV: sow-app-auth # TODO: update Cloud Run service name
-  REGION: us-east4 # TODO: update Cloud Run service region
+  CONFIG_FILE: gcp-api-config.yaml # TODO: update Cloud Run service region
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -41,7 +41,7 @@ jobs:
             # make file runnable, might not be necessary
              chmod +x "${GITHUB_WORKSPACE}/gcp-apigateway-build.sh"
             # Run the script for deployment 
-             bash -x ${GITHUB_WORKSPACE}/gcp-apigateway-build.sh ${{ env.DEV_PROJECT_ID }} ${{ env.API_NAME-DEV }} 
+             bash -x ${GITHUB_WORKSPACE}/gcp-apigateway-build.sh ${{ env.DEV_PROJECT_ID }} ${{ env.API_NAME-DEV }} ${GITHUB_WORKSPACE}/${{ env.CONFIG_FILE }}
            
 
              

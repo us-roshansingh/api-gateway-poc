@@ -5,6 +5,7 @@
 
 PROJECT_ID=$1
 API_NAME=$2
+CONFIG_FILE=$3
 COPY . ./
 #Enable required APIs in Cloud Shell, run the following commands to enable the required service
 gcloud config set project $PROJECT_ID
@@ -16,7 +17,7 @@ gcloud services enable servicecontrol.googleapis.com
 gcloud services enable iap.googleapis.com
 
 #Create the API gateway config by running the following command
-gcloud api-gateway api-configs create gcp-cms-api-config --api=$API_NAME --openapi-spec=gcp-cms-api-config.yaml --project=$PROJECT_ID
+gcloud api-gateway api-configs create gcp-cms-api-config --api=$API_NAME --openapi-spec=$CONFIG_FILE --project=$PROJECT_ID
 
 #deploy the API config to a gateway, run the below command
 gcloud api-gateway gateways create gcp-cms-api-gateway --api=$API_NAME --api-config=gcp-cms-api-config --location=us-east4 --project=$PROJECT_ID
