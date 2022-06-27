@@ -1,6 +1,6 @@
     swagger: "2.0"
     info:
-      title: sow-prov-auth
+      title: sow-app-auth
       description: "For authentication from OneCloud Portal team"
       version: "1.0.0"
     schemes:
