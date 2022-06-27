@@ -14,7 +14,7 @@ on:
   #workflow_dispatch:
   
 env:
-  DEV_PROJECT_ID: gcp-provisioning-framework # TODO: update Google Cloud project id
+  DEV_PROJECT_ID: provisionsowtestrrr # TODO: update Google Cloud project id
   STAGE_PROJECT_ID:  test-project # TODO: update Google Cloud project id
   PROD_PROJECT_ID:  test-project # TODO: update Google Cloud project id
   API_NAME-DEV: sow-app-auth # TODO: update Cloud Run service name
