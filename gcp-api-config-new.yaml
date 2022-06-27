@@ -1,6 +1,6 @@
     swagger: "2.0"
     info:
-      title: sow-app-auth
+      title: sow-prov-auth
       description: "For authentication from OneCloud Portal team"
       version: "1.0.0"
     schemes:
@@ -29,3 +29,20 @@
                 type: string
             400:
               description: "Destination is Unavailable."
+
+      /resource-manager/project/label:
+         post:
+          description: "SOW Provision framework"
+          operationId: projectProvision
+          x-google-backend:
+            address: https://onecloud-fastapi-canlcqfcea-uk.a.run.app
+          security:
+            - api_key : []
+          
+          responses:
+            200:
+              description: "Success."
+              schema:
+                type: string
+            400:
+              description: "Destination is Unavailable."        
