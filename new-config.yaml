@@ -579,7 +579,7 @@ paths:
         - This EP will only work for GCP projects created using this framework.
       operationId: remove_group_iam_project_iam_manager_group_delete
       x-google-backend:
-          address: https://onecloud-fastapi-canlcqfcea-uk.a.run.app
+          address: https://onecloud-fastapi-canlcqfcea-uk.a.run.app/iam-manager/group
       security:
             - api_key : []        
       parameters:
@@ -639,7 +639,7 @@ paths:
         - This EP will only work for GCP projects created using this framework.
       operationId: add_group_iam_project_iam_manager_group_post
       x-google-backend:
-        address: https://onecloud-fastapi-canlcqfcea-uk.a.run.app
+        address: https://onecloud-fastapi-canlcqfcea-uk.a.run.app/iam-manager/group
       security:
             - api_key : []  
       parameters:
@@ -679,7 +679,7 @@ paths:
       description: Adds labels to the BaseLabels configuration
       operationId: add_new_label_keys_label_configuration_add_labels_patch
       x-google-backend:
-          address: https://onecloud-fastapi-canlcqfcea-uk.a.run.app
+          address: https://onecloud-fastapi-canlcqfcea-uk.a.run.app/label-configuration/add-labels
       security:
             - api_key : []
       parameters:
@@ -737,7 +737,7 @@ paths:
         field, the path would be "labels/my-new-label".
       operationId: create_new_label_config_label_configuration_labels_post
       x-google-backend:
-          address: https://onecloud-fastapi-canlcqfcea-uk.a.run.app
+          address: https://onecloud-fastapi-canlcqfcea-uk.a.run.app/label-configuration/labels
       security:
             - api_key : []        
       parameters:
@@ -777,7 +777,7 @@ paths:
       description: Removes labels from the BaseLabels configuration
       operationId: remove_label_keys_label_configuration_remove_labels_delete
       x-google-backend:
-          address: https://onecloud-fastapi-canlcqfcea-uk.a.run.app
+          address: https://onecloud-fastapi-canlcqfcea-uk.a.run.app/label-configuration/remove-labels
       security:
             - api_key : []        
       parameters:
@@ -832,7 +832,7 @@ paths:
         with the correct path.
       operationId: update_label_keys_label_configuration_update_labels_patch
       x-google-backend:
-          address: https://onecloud-fastapi-canlcqfcea-uk.a.run.app
+          address: https://onecloud-fastapi-canlcqfcea-uk.a.run.app/label-configuration/update-labels
       security:
             - api_key : []        
       parameters:
@@ -870,7 +870,7 @@ paths:
       description: Returns the NotificationLog collection from Firestore
       operationId: get_notification_logs_monitoring_notifications_get
       x-google-backend:
-          address: https://onecloud-fastapi-canlcqfcea-uk.a.run.app
+          address: https://onecloud-fastapi-canlcqfcea-uk.a.run.app/monitoring/notifications
       security:
             - api_key : []        
       parameters: []
@@ -938,7 +938,7 @@ paths:
         endpoint.
       operationId: extend_routable_network_resource_manager_extend_routable_network_post
       x-google-backend:
-          address: https://onecloud-fastapi-canlcqfcea-uk.a.run.app
+          address: https://onecloud-fastapi-canlcqfcea-uk.a.run.app/resource-manager/extend-routable-network
       security:
             - api_key : []        
       parameters:
@@ -985,7 +985,7 @@ paths:
         - The endpoint only works for projects created with this framework.
       operationId: delete_project_resource_manager_project_delete
       x-google-backend:
-          address: https://onecloud-fastapi-canlcqfcea-uk.a.run.app
+          address: https://onecloud-fastapi-canlcqfcea-uk.a.run.app/resource-manager/project
       security:
             - api_key : []        
       parameters:
@@ -1040,7 +1040,7 @@ paths:
         - The subnet mask field only has an effect for routable networks.
       operationId: create_base_resources_resource_manager_project_post
       x-google-backend:
-          address: https://onecloud-fastapi-canlcqfcea-uk.a.run.app
+          address: https://onecloud-fastapi-canlcqfcea-uk.a.run.app/resource-manager/project
       security:
             - api_key : []      
       parameters:
@@ -1095,7 +1095,7 @@ paths:
         - The endpoint only works for projects created with this framework.
       operationId: add_label_project_resources_resource_manager_project_label_post
       x-google-backend:
-          address: https://onecloud-fastapi-canlcqfcea-uk.a.run.app
+          address: https://onecloud-fastapi-canlcqfcea-uk.a.run.app/resource-manager/project/label
       security:
             - api_key : []        
       parameters:
@@ -1141,7 +1141,7 @@ paths:
         - The endpoint only works for projects created with this framework.
       operationId: update_label_value_project_resource_manager_project_label_value_patch
       x-google-backend:
-          address: https://onecloud-fastapi-canlcqfcea-uk.a.run.app
+          address: https://onecloud-fastapi-canlcqfcea-uk.a.run.app/resource-manager/project/label-value
       security:
             - api_key : []        
       parameters:
@@ -1203,7 +1203,7 @@ paths:
         endpoint.
       operationId: create_routable_network_resource_manager_routable_network_post
       x-google-backend:
-          address: https://onecloud-fastapi-canlcqfcea-uk.a.run.app
+          address: https://onecloud-fastapi-canlcqfcea-uk.a.run.app/resource-manager/routable-network
       security:
             - api_key : []        
       parameters:
