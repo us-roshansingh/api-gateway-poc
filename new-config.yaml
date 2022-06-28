@@ -578,6 +578,10 @@ paths:
 
         - This EP will only work for GCP projects created using this framework.
       operationId: remove_group_iam_project_iam_manager_group_delete
+      x-google-backend:
+          address: https://onecloud-fastapi-canlcqfcea-uk.a.run.app
+      security:
+            - api_key : []        
       parameters:
         - in: body
           name: body
@@ -634,6 +638,10 @@ paths:
 
         - This EP will only work for GCP projects created using this framework.
       operationId: add_group_iam_project_iam_manager_group_post
+      x-google-backend:
+        address: https://onecloud-fastapi-canlcqfcea-uk.a.run.app
+      security:
+            - api_key : []  
       parameters:
         - in: body
           name: body
@@ -728,6 +736,10 @@ paths:
 
         field, the path would be "labels/my-new-label".
       operationId: create_new_label_config_label_configuration_labels_post
+      x-google-backend:
+          address: https://onecloud-fastapi-canlcqfcea-uk.a.run.app
+      security:
+            - api_key : []        
       parameters:
         - in: body
           name: body
@@ -764,6 +776,10 @@ paths:
         - application/json
       description: Removes labels from the BaseLabels configuration
       operationId: remove_label_keys_label_configuration_remove_labels_delete
+      x-google-backend:
+          address: https://onecloud-fastapi-canlcqfcea-uk.a.run.app
+      security:
+            - api_key : []        
       parameters:
         - in: body
           name: body
@@ -815,6 +831,10 @@ paths:
 
         with the correct path.
       operationId: update_label_keys_label_configuration_update_labels_patch
+      x-google-backend:
+          address: https://onecloud-fastapi-canlcqfcea-uk.a.run.app
+      security:
+            - api_key : []        
       parameters:
         - in: body
           name: body
@@ -849,6 +869,10 @@ paths:
     get:
       description: Returns the NotificationLog collection from Firestore
       operationId: get_notification_logs_monitoring_notifications_get
+      x-google-backend:
+          address: https://onecloud-fastapi-canlcqfcea-uk.a.run.app
+      security:
+            - api_key : []        
       parameters: []
       produces:
         - application/json
@@ -913,6 +937,10 @@ paths:
         indicating that the network was successfully created before calling this
         endpoint.
       operationId: extend_routable_network_resource_manager_extend_routable_network_post
+      x-google-backend:
+          address: https://onecloud-fastapi-canlcqfcea-uk.a.run.app
+      security:
+            - api_key : []        
       parameters:
         - in: body
           name: body
@@ -956,6 +984,10 @@ paths:
         Please note:
         - The endpoint only works for projects created with this framework.
       operationId: delete_project_resource_manager_project_delete
+      x-google-backend:
+          address: https://onecloud-fastapi-canlcqfcea-uk.a.run.app
+      security:
+            - api_key : []        
       parameters:
         - in: body
           name: body
@@ -1062,7 +1094,10 @@ paths:
 
         - The endpoint only works for projects created with this framework.
       operationId: add_label_project_resources_resource_manager_project_label_post
-      
+      x-google-backend:
+          address: https://onecloud-fastapi-canlcqfcea-uk.a.run.app
+      security:
+            - api_key : []        
       parameters:
         - in: body
           name: body
@@ -1105,6 +1140,10 @@ paths:
         Please note:
         - The endpoint only works for projects created with this framework.
       operationId: update_label_value_project_resource_manager_project_label_value_patch
+      x-google-backend:
+          address: https://onecloud-fastapi-canlcqfcea-uk.a.run.app
+      security:
+            - api_key : []        
       parameters:
         - in: body
           name: body
@@ -1163,6 +1202,10 @@ paths:
         indicating that the project was successfully created before calling this
         endpoint.
       operationId: create_routable_network_resource_manager_routable_network_post
+      x-google-backend:
+          address: https://onecloud-fastapi-canlcqfcea-uk.a.run.app
+      security:
+            - api_key : []        
       parameters:
         - in: body
           name: body
