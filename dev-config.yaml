@@ -560,7 +560,7 @@ definitions:
     title: UpdateLabelsRequest
     type: object
 info:
-  title: fastapi
+  title: fastapi-dev
   version: 0.1.0
 paths:
   /iam-manager/group:

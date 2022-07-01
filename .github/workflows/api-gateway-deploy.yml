@@ -14,18 +14,23 @@ on:
   #workflow_dispatch:
   
 env:
-  DEV_PROJECT_ID: provisionsowtestrrr # TODO: update Google Cloud project id
-  STG_PROJECT_ID: onecloud-provision-stg # TODO: update Google Cloud project id
-  PRD_PROJECT_ID:  test-project # TODO: update Google Cloud project id
-  API_NAME-DEV: fastapi-dev # TODO: update Cloud Run service name
-  API_NAME-STG: fastapi-stg # TODO: update Cloud Run service name
-  API_NAME-PRD: fastapi-prd # TODO: update Cloud Run service name
-  CONFIG_FILE_DEV: dev-config.yaml # TODO: update Cloud Run service region
-  CONFIG_FILE_STG: stg-config.yaml # TODO: update Cloud Run service region
-  CONFIG_FILE_PRD: prd-config.yaml # TODO: update Cloud Run service region  
+  # TODO: update Google Cloud project id
+  DEV_PROJECT_ID: provisionsowtestrrr
+  STG_PROJECT_ID: onecloud-provision-stg
+  PRD_PROJECT_ID:  test-project
+  # TODO: Setup API name for API Gateway Config
+  API_NAME-DEV: fastapi-dev
+  API_NAME-STG: fastapi-stg
+  API_NAME-PRD: fastapi-prd
+  # TODO: Config Files Location based on Environment (Dev,Stg,Prd)
+  CONFIG_FILE_DEV: dev-config.yaml
+  CONFIG_FILE_STG: stg-config.yaml
+  CONFIG_FILE_PRD: prd-config.yaml
+  # TODO: API Gateway name based on Deployment(Dev,Stg,Prd))
   API_GATEWAY_DEV: onecloud-api-gateway-dev
   API_GATEWAY_STG: onecloud-api-gateway-stg
   API_GATEWAY_PRD: onecloud-api-gateway-prd
+  # TODO: Configuration Name based on Enviroment(Dev,Stg,Prd)
   CONFIG_NAME_DEV: onecloud-api-config-dev
   CONFIG_NAME_STG: onecloud-api-config-stg
   CONFIG_NAME_PRD: onecloud-api-config-prd

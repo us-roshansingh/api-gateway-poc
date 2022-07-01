@@ -28,5 +28,5 @@ gcloud api-gateway gateways create $APIGATEWAY --api=$API_NAME --api-config=$CON
 gcloud api-gateway gateways describe $APIGATEWAY --location=us-east4 --project=$PROJECT_ID
 
 #Enable the created api in API & Service page
-MANAGED_SERVICE_NAME=$(gcloud api-gateway apis describe $API_NAME --format="value(managedService)")
-gcloud services enable $MANAGED_SERVICE_NAME
+# MANAGED_SERVICE_NAME=$(gcloud api-gateway apis describe $API_NAME --format="value(managedService)")
+# gcloud services enable $MANAGED_SERVICE_NAME

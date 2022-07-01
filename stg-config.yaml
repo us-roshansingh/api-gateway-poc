@@ -1,0 +1,1241 @@
+securityDefinitions:
+       api_key:
+          type: "apiKey"
+          name: "key"
+          in: "query"
+definitions:
+  ApplicationInformation:
+    description: Project Resource representation.
+    properties:
+      application_code:
+        pattern: '^[a-zA-Z0-9]{1,5}$'
+        title: Application Code
+        type: string
+      billing_account:
+        pattern: '^[A-Z0-9\-]+$'
+        title: Billing Account
+        type: string
+      country_code:
+        pattern: '^[a-zA-Z]{1,3}$'
+        title: Country Code
+        type: string
+      environment:
+        pattern: '^[a-zA-Z0-9]{3}$'
+        title: Environment
+        type: string
+      function:
+        pattern: '^[a-zA-Z]{3}$'
+        title: Function
+        type: string
+      geo_region:
+        pattern: '^[a-zA-Z0-9]{3}$'
+        title: Geo Region
+        type: string
+      member_firm:
+        maxLength: 5
+        minLength: 2
+        title: Member Firm
+        type: string
+      organization_id:
+        pattern: '^[1-9]\d*$'
+        title: Organization Id
+        type: string
+      platform:
+        pattern: '^[a-zA-Z]{3}$'
+        title: Platform
+        type: string
+    required:
+      - application_code
+      - country_code
+      - environment
+      - function
+      - member_firm
+      - platform
+      - geo_region
+      - organization_id
+      - billing_account
+    title: ApplicationInformation
+    type: object
+  BaseLabelConfig:
+    description: Abstract class for base label configrations
+    properties:
+      label_key:
+        pattern: '^[a-z0-9\-\_]{1,63}$'
+        title: Label Key
+        type: string
+      label_value_path:
+        pattern: '^[a-z0-9\-\_/]{1,63}$'
+        title: Label Value Path
+        type: string
+    required:
+      - label_key
+      - label_value_path
+    title: BaseLabelConfig
+    type: object
+  BaseLabelsRequest:
+    description: Base Label Schema
+    properties:
+      keys:
+        items:
+          $ref: '#/definitions/BaseLabelConfig'
+        title: Keys
+        type: array
+      requester:
+        format: email
+        title: Requester
+        type: string
+    required:
+      - requester
+      - keys
+    title: BaseLabelsRequest
+    type: object
+  ConflictErrorResponse:
+    description: |-
+      ConflictErrorResponse
+      Example of a ConflictErrorResponse for OpenAPI
+    properties:
+      error:
+        allOf:
+          - $ref: '#/definitions/ErrorDetail'
+        default:
+          code: 409
+          details:
+            loc: []
+            msg: string
+            type: string
+          message: string
+          status: string
+        title: Error
+    title: ConflictErrorResponse
+    type: object
+  DeleteLabelsRequest:
+    description: Delete Labels from the Label configuration
+    properties:
+      keys:
+        items:
+          pattern: '^[a-z0-9\-\_]{1,63}$'
+          type: string
+        title: Keys
+        type: array
+      requester:
+        format: email
+        title: Requester
+        type: string
+    required:
+      - requester
+      - keys
+    title: DeleteLabelsRequest
+    type: object
+  DeleteProjectRequest:
+    description: Required data for delete project
+    properties:
+      project_id:
+        pattern: '^[a-z]{1}[a-z0-9\-]{4,28}[a-z0-9]{1}$'
+        title: Project Id
+        type: string
+      requester:
+        format: email
+        title: Requester
+        type: string
+    required:
+      - requester
+      - project_id
+    title: DeleteProjectRequest
+    type: object
+  ErrorDetail:
+    description: |-
+      ErrorDetail
+      Requirements for the error detail
+    properties:
+      code:
+        title: Code
+        type: integer
+      details:
+        default: {}
+        title: Details
+      message:
+        default: string
+        title: Message
+        type: string
+      status:
+        default: string
+        title: Status
+        type: string
+    required:
+      - code
+    title: ErrorDetail
+    type: object
+  ErrorResponse:
+    description: |-
+      ErrorResponse
+      Error response for all API calls
+    properties:
+      error:
+        $ref: '#/definitions/ErrorDetail'
+    required:
+      - error
+    title: ErrorResponse
+    type: object
+  ExtendRoutableNetworkRequest:
+    description: |-
+      ExtendRoutableNetworkRequest
+      Request to add a subnet to a routable network in GCP
+
+      Args:
+          requester (str): Person making request
+          project_id (str): Project ID for network
+          network_name (str): Name of VPC to extend
+          subnet_region (str): GCP region for the subnet
+    properties:
+      network_name:
+        title: Network Name
+        type: string
+      project_id:
+        pattern: '^[a-z]{1}[a-z0-9\-]{4,28}[a-z0-9]{1}$'
+        title: Project Id
+        type: string
+      requester:
+        format: email
+        title: Requester
+        type: string
+      subnet_region:
+        $ref: '#/definitions/GcpRegion'
+    required:
+      - requester
+      - project_id
+      - network_name
+      - subnet_region
+    title: ExtendRoutableNetworkRequest
+    type: object
+  GcpRegion:
+    description: Representation of the available GCP regions
+    enum:
+      - asia-east1
+      - asia-east2
+      - asia-northeast1
+      - asia-northeast2
+      - asia-northeast3
+      - asia-south1
+      - asia-south2
+      - asia-southeast1
+      - asia-southeast2
+      - australia-southeast1
+      - australia-southeast2
+      - europe-central2
+      - europe-north1
+      - europe-west1
+      - europe-west2
+      - europe-west3
+      - europe-west4
+      - europe-west6
+      - northamerica-northeast1
+      - northamerica-northeast2
+      - southamerica-east1
+      - southamerica-west1
+      - us-central1
+      - us-east1
+      - us-east4
+      - us-west1
+      - us-west2
+      - us-west3
+      - us-west4
+    title: GcpRegion
+    type: string
+  IamResource:
+    description: Iam Resource representation
+    properties:
+      group_email:
+        pattern: '^[A-Za-z0-9\-_]+@(deloitte|hotmail|gmail)+\.[A-Z|a-z]+$'
+        title: Group Email
+        type: string
+      roles:
+        items:
+          type: string
+        title: Roles
+        type: array
+    required:
+      - group_email
+      - roles
+    title: IamResource
+    type: object
+  IamResourceRequest:
+    description: |-
+      Represents the Request that is going
+      to be provided group mail and roles to
+      project created
+    properties:
+      iam:
+        $ref: '#/definitions/IamResource'
+      project_id:
+        pattern: '^[a-z]{1}[a-z0-9\-]{4,28}[a-z0-9]{1}$'
+        title: Project Id
+        type: string
+      requester:
+        format: email
+        title: Requester
+        type: string
+    required:
+      - requester
+      - project_id
+      - iam
+    title: IamResourceRequest
+    type: object
+  IamResourceRequestRemove:
+    description: |-
+      Represents the Request that is going
+      to be provided group mail and roles to
+      project remove
+    properties:
+      iam:
+        $ref: '#/definitions/IamResource'
+      project_id:
+        pattern: '^[a-z]{1}[a-z0-9\-]{4,28}[a-z0-9]{1}$'
+        title: Project Id
+        type: string
+      requester:
+        format: email
+        title: Requester
+        type: string
+    required:
+      - requester
+      - project_id
+      - iam
+    title: IamResourceRequestRemove
+    type: object
+  LabelRequest:
+    description: |-
+      LabelRequest
+      Payload to update a label
+    properties:
+      label_key:
+        pattern: '^[a-z0-9\-\_]{1,63}$'
+        title: Label Key
+        type: string
+      label_value:
+        pattern: '^[a-z0-9\-\_]{1,63}$'
+        title: Label Value
+        type: string
+    required:
+      - label_key
+      - label_value
+    title: LabelRequest
+    type: object
+  NetworkResource:
+    description: |-
+      NetworkResource
+      Request for a network at project creation in GCP
+
+      Args:
+          subnet_region (str): GCP region for the subnet
+          is_routable (Optional[bool]): Optional - If the requested network is routable
+          subnet_mask (Optional[str]): Optional - Mask for routable network
+    properties:
+      is_routable:
+        default: false
+        title: Is Routable
+        type: boolean
+      subnet_mask:
+        title: Subnet Mask
+        type: string
+      subnet_region:
+        $ref: '#/definitions/GcpRegion'
+    required:
+      - subnet_region
+    title: NetworkResource
+    type: object
+  ProjectLabelsRequest:
+    description: |-
+      ProjectLabelsRequest
+      The request to add or update labels on a project
+    properties:
+      labels:
+        items:
+          $ref: '#/definitions/LabelRequest'
+        title: Labels
+        type: array
+      project_id:
+        pattern: '^[a-z]{1}[a-z0-9\-]{4,28}[a-z0-9]{1}$'
+        title: Project Id
+        type: string
+      requester:
+        format: email
+        title: Requester
+        type: string
+    required:
+      - requester
+      - project_id
+      - labels
+    title: ProjectLabelsRequest
+    type: object
+  ProvisionResourceRequest:
+    description: |-
+      Represents the Request that is going
+      to be provided to the Orchestrator. It includes
+      all the required resources on first Project
+      creation.
+    properties:
+      application_information:
+        $ref: '#/definitions/ApplicationInformation'
+        title: Labels
+        type: object
+      networks:
+        items:
+          $ref: '#/definitions/NetworkResource'
+        title: Networks
+        type: array
+      requester:
+        format: email
+        title: Requester
+        type: string
+    required:
+      - requester
+      - application_information
+      - networks
+      - labels
+    title: ProvisionResourceRequest
+    type: object
+  RoutableNetworkRequest:
+    description: |-
+      RoutableNetworkRequest
+      Request for a routable network in GCP
+
+      Args:
+          requester (str): Person making request
+          project_id (str): Project ID for network
+          subnet_region (str): GCP region for the subnet
+          subnet_mask (Optional[str]): Subnet mask, default is 27 => 32 IP Address
+    properties:
+      project_id:
+        pattern: '^[a-z]{1}[a-z0-9\-]{4,28}[a-z0-9]{1}$'
+        title: Project Id
+        type: string
+      requester:
+        format: email
+        title: Requester
+        type: string
+      subnet_mask:
+        default: '27'
+        title: Subnet Mask
+        type: string
+      subnet_region:
+        $ref: '#/definitions/GcpRegion'
+    required:
+      - requester
+      - project_id
+      - subnet_region
+    title: RoutableNetworkRequest
+    type: object
+  Success200Response:
+    description: |-
+      SuccessResponse
+      Model for the success response for all API call
+    properties:
+      details:
+        title: Details
+      error:
+        default: false
+        title: Error
+        type: boolean
+      message:
+        default: Request was successful
+        title: Message
+        type: string
+      status:
+        default: SUCCESSFUL
+        title: Status
+        type: string
+      warning:
+        title: Warning
+        type: string
+    required:
+      - details
+    title: Success200Response
+    type: object
+  Success201Response:
+    description: |-
+      SuccessResponse
+      Model for the success response for all API call
+    properties:
+      details:
+        title: Details
+      error:
+        default: false
+        title: Error
+        type: boolean
+      message:
+        default: Request was successful
+        title: Message
+        type: string
+      status:
+        default: CREATED
+        title: Status
+        type: string
+      warning:
+        title: Warning
+        type: string
+    required:
+      - details
+    title: Success201Response
+    type: object
+  Success202Response:
+    description: |-
+      SuccessResponse
+      Model for the success response for all API call
+    properties:
+      details:
+        title: Details
+      error:
+        default: false
+        title: Error
+        type: boolean
+      message:
+        default: Request was accepted
+        title: Message
+        type: string
+      status:
+        default: ACCEPTED
+        title: Status
+        type: string
+      warning:
+        title: Warning
+        type: string
+    required:
+      - details
+    title: Success202Response
+    type: object
+  UnprocessableErrorResponse:
+    description: |-
+      UnprocessableErrorResponse
+      Example of a UnprocessableErrorResponse for OpenAPI
+    properties:
+      error:
+        allOf:
+          - $ref: '#/definitions/ErrorDetail'
+        default:
+          code: 422
+          details:
+            loc: []
+            msg: string
+            type: string
+          message: string
+          status: string
+        title: Error
+    title: UnprocessableErrorResponse
+    type: object
+  UpdateLabelConfig:
+    description: Label configuration data
+    properties:
+      current_label:
+        pattern: '^[a-z0-9\-\_]{1,63}$'
+        title: Current Label
+        type: string
+      updated_label:
+        pattern: '^[a-z0-9\-\_]{1,63}$'
+        title: Updated Label
+        type: string
+      updated_path:
+        pattern: '^[a-z0-9\-\_/]{1,63}$'
+        title: Updated Path
+        type: string
+    required:
+      - current_label
+      - updated_label
+    title: UpdateLabelConfig
+    type: object
+  UpdateLabelsRequest:
+    description: Update specific Labels for the Label configuration
+    properties:
+      keys:
+        items:
+          $ref: '#/definitions/UpdateLabelConfig'
+        title: Keys
+        type: array
+      requester:
+        format: email
+        title: Requester
+        type: string
+    required:
+      - requester
+      - keys
+    title: UpdateLabelsRequest
+    type: object
+info:
+  title: fastapi-stg
+  version: 0.1.0
+paths:
+  /iam-manager/group:
+    delete:
+      consumes:
+        - application/json
+      description: >-
+        Remove roles from user group on a GCP project. The request will be
+        publish
+
+        to a Pub/Sub topic that will be consumed by a Cloud Function
+
+
+        Please note:
+
+        - This EP will only work for GCP projects created using this framework.
+      operationId: remove_group_iam_project_iam_manager_group_delete
+      x-google-backend:
+          address: https://onecloud-fastapi-4edanfop6q-uk.a.run.app/iam-manager/group
+      security:
+            - api_key : []        
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/IamResourceRequestRemove'
+      produces:
+        - application/json
+      responses:
+        '202':
+          description: Successful Response
+          schema:
+            $ref: '#/definitions/Success202Response'
+        '409':
+          description: Conflict
+          schema:
+            $ref: '#/definitions/ConflictErrorResponse'
+        '422':
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/UnprocessableErrorResponse'
+        '400':
+          description: Client Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: Remove Group Iam Project
+    post:
+      consumes:
+        - application/json
+      description: >-
+        Creates a GCP user policy by assigning a list of IAM roles to a user
+        group email.
+
+        The request is saved into Firestore and a message is sent to a Pub/Sub
+        topic that
+
+        will trigger a GCP Cloud Function to create the policy. If the user
+        group email does
+
+        not exist in GCP at the time the endpoint is called, the Cloud Function
+        will retry
+
+        for a number of hours before failing. Upon success or failure, an email
+        notification
+
+        will be send to the requester.
+
+
+        Please note:
+
+        - This EP will only work for GCP projects created using this framework.
+      operationId: add_group_iam_project_iam_manager_group_post
+      x-google-backend:
+        address: https://onecloud-fastapi-4edanfop6q-uk.a.run.app/iam-manager/group
+      security:
+            - api_key : []  
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/IamResourceRequest'
+      produces:
+        - application/json
+      responses:
+        '202':
+          description: Successful Response
+          schema:
+            $ref: '#/definitions/Success202Response'
+        '409':
+          description: Conflict
+          schema:
+            $ref: '#/definitions/ConflictErrorResponse'
+        '422':
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/UnprocessableErrorResponse'
+        '400':
+          description: Client Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: Add Group Iam Project
+  /label-configuration/add-labels:
+    patch:
+      consumes:
+        - application/json
+      description: Adds labels to the BaseLabels configuration
+      operationId: add_new_label_keys_label_configuration_add_labels_patch
+      x-google-backend:
+          address: https://onecloud-fastapi-4edanfop6q-uk.a.run.app/label-configuration/add-labels
+      security:
+            - api_key : []
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/BaseLabelsRequest'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Successful Response
+          schema:
+            $ref: '#/definitions/Success200Response'
+        '409':
+          description: Conflict
+          schema:
+            $ref: '#/definitions/ConflictErrorResponse'
+        '422':
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/UnprocessableErrorResponse'
+        '400':
+          description: Client Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: Add New Label Keys
+  /label-configuration/labels:
+    post:
+      consumes:
+        - application/json
+      description: >-
+        Creates a new BaseLabel configuration in Firestore. This BaseLabel
+        configuration
+
+        sets the label requirements for projects created with this framework.
+
+        A BaseLabel configuration needs to be set before a project can be
+        created with
+
+        this framework.
+
+
+        The label_value_path represents the path to the label value in the
+        payload
+
+        to create a project. For example, if the label value is sent in the
+        "labels"
+
+        field, the path would be "labels/my-new-label".
+      operationId: create_new_label_config_label_configuration_labels_post
+      x-google-backend:
+          address: https://onecloud-fastapi-4edanfop6q-uk.a.run.app/label-configuration/labels
+      security:
+            - api_key : []        
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/BaseLabelsRequest'
+      produces:
+        - application/json
+      responses:
+        '201':
+          description: Successful Response
+          schema:
+            $ref: '#/definitions/Success201Response'
+        '409':
+          description: Conflict
+          schema:
+            $ref: '#/definitions/ConflictErrorResponse'
+        '422':
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/UnprocessableErrorResponse'
+        '400':
+          description: Client Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: Create New Label Config
+  /label-configuration/remove-labels:
+    delete:
+      consumes:
+        - application/json
+      description: Removes labels from the BaseLabels configuration
+      operationId: remove_label_keys_label_configuration_remove_labels_delete
+      x-google-backend:
+          address: https://onecloud-fastapi-4edanfop6q-uk.a.run.app/label-configuration/remove-labels
+      security:
+            - api_key : []        
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteLabelsRequest'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Successful Response
+          schema:
+            $ref: '#/definitions/Success200Response'
+        '409':
+          description: Conflict
+          schema:
+            $ref: '#/definitions/ConflictErrorResponse'
+        '422':
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/UnprocessableErrorResponse'
+        '400':
+          description: Client Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: Remove Label Keys
+  /label-configuration/update-labels:
+    patch:
+      consumes:
+        - application/json
+      description: >-
+        Updates labels and their paths for the BaseLabels configuration. This
+        allows for a
+
+        change in the label key, and also to change the path to the label value
+        in the create
+
+        project payload.
+
+
+        Please note:
+
+        - The path cannot be changed directly. To do so, remove the label, then
+        re-create it
+
+        with the correct path.
+      operationId: update_label_keys_label_configuration_update_labels_patch
+      x-google-backend:
+          address: https://onecloud-fastapi-4edanfop6q-uk.a.run.app/label-configuration/update-labels
+      security:
+            - api_key : []        
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateLabelsRequest'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Successful Response
+          schema:
+            $ref: '#/definitions/Success200Response'
+        '409':
+          description: Conflict
+          schema:
+            $ref: '#/definitions/ConflictErrorResponse'
+        '422':
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/UnprocessableErrorResponse'
+        '400':
+          description: Client Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: Update Label Keys
+  /monitoring/notifications:
+    get:
+      description: Returns the NotificationLog collection from Firestore
+      operationId: get_notification_logs_monitoring_notifications_get
+      x-google-backend:
+          address: https://onecloud-fastapi-4edanfop6q-uk.a.run.app/monitoring/notifications
+      security:
+            - api_key : []        
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Successful Response
+          schema:
+            $ref: '#/definitions/Success200Response'
+        '409':
+          description: Conflict
+          schema:
+            $ref: '#/definitions/ConflictErrorResponse'
+        '422':
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/UnprocessableErrorResponse'
+        '400':
+          description: Client Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: Get Notification Logs
+  /resource-manager/extend-routable-network:
+    post:
+      consumes:
+        - application/json
+      description: >-
+        Extends an exisiting routable network in GCP. This endpoint allocates
+        the necessary
+
+        IP ranges in the IPAM and send a message to a Pub/Sub topic which
+        triggers the
+
+        orchestrator that will create a new '/27' subnet in the existing VPC.
+        Once the subnet has
+
+        been successfully created in GCP, and the Cloud Router reconfigure to
+        advertise the new
+
+        subnet an email notification will be send to the requester.
+
+
+        Please note:
+
+        - The endpoint only extends routable networks.
+
+        - The endpoint can only extend networks that were created with this
+        framework.
+
+        - The endpoint can only extend a network into the same region it was
+        created in.
+
+        (ie: if the network was created in 'us-west2', it can only be extended
+        into 'us-west2')
+
+        - If you have recently created a network, please wait to recieve an
+        email notification
+
+        indicating that the network was successfully created before calling this
+        endpoint.
+      operationId: extend_routable_network_resource_manager_extend_routable_network_post
+      x-google-backend:
+          address: https://onecloud-fastapi-4edanfop6q-uk.a.run.app/resource-manager/extend-routable-network
+      security:
+            - api_key : []        
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/ExtendRoutableNetworkRequest'
+      produces:
+        - application/json
+      responses:
+        '202':
+          description: Successful Response
+          schema:
+            $ref: '#/definitions/Success202Response'
+        '409':
+          description: Conflict
+          schema:
+            $ref: '#/definitions/ConflictErrorResponse'
+        '422':
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/UnprocessableErrorResponse'
+        '400':
+          description: Client Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: Extend Routable Network
+  /resource-manager/project:
+    delete:
+      consumes:
+        - application/json
+      description: |-
+        Schedules a GCP project for deletion. The request will publish a message
+        to a Pub/Sub topic and mark the project in Firestore as "pending_delete"
+        The orchestrator will receive the message and send an API call to GCP to
+        schedule the project for deletion.
+
+        Please note:
+        - The endpoint only works for projects created with this framework.
+      operationId: delete_project_resource_manager_project_delete
+      x-google-backend:
+          address: https://onecloud-fastapi-4edanfop6q-uk.a.run.app/resource-manager/project
+      security:
+            - api_key : []        
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteProjectRequest'
+      produces:
+        - application/json
+      responses:
+        '202':
+          description: Successful Response
+          schema:
+            $ref: '#/definitions/Success202Response'
+        '409':
+          description: Conflict
+          schema:
+            $ref: '#/definitions/ConflictErrorResponse'
+        '422':
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/UnprocessableErrorResponse'
+        '400':
+          description: Client Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: Delete Project
+    post:
+      consumes:
+        - application/json
+      description: >-
+        Creates a project with a network in GCP. This endpoint allocates the
+        necessary
+
+        IP ranges in the IPAM (if necesary) and send a message to a Pub/Sub
+        topic which
+
+        triggers the orchestrator that will the project and network. Once the
+        project has
+
+        been successfully created in GCP an email notification will be send to
+        the requester.
+
+
+        Please note:
+
+        - The subnet mask field only has an effect for routable networks.
+      operationId: create_base_resources_resource_manager_project_post
+      x-google-backend:
+          address: https://onecloud-fastapi-4edanfop6q-uk.a.run.app/resource-manager/project
+      security:
+            - api_key : []      
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/ProvisionResourceRequest'
+      produces:
+        - application/json
+      responses:
+        '202':
+          description: Successful Response
+          schema:
+            $ref: '#/definitions/Success202Response'
+        '409':
+          description: Conflict
+          schema:
+            $ref: '#/definitions/ConflictErrorResponse'
+        '422':
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/UnprocessableErrorResponse'
+        '400':
+          description: Client Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: Create Base Resources
+  /resource-manager/project/label:
+    post:
+      consumes:
+        - application/json
+      description: >-
+        Adds labels to an existing project. The framework will validate the
+        current project
+
+        labels against the BaseLabels configuration and return a warning message
+        if it finds
+
+        a label that is missing. The request will be published to a Pub/Sub
+        topic
+
+        that will trigger a GCP Cloud Function that will apply the labels.
+
+
+        Please note:
+
+        - The endpoint only works for projects created with this framework.
+      operationId: add_label_project_resources_resource_manager_project_label_post
+      x-google-backend:
+          address: https://onecloud-fastapi-4edanfop6q-uk.a.run.app/resource-manager/project/label
+      security:
+            - api_key : []        
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/ProjectLabelsRequest'
+      produces:
+        - application/json
+      responses:
+        '202':
+          description: Successful Response
+          schema:
+            $ref: '#/definitions/Success202Response'
+        '409':
+          description: Conflict
+          schema:
+            $ref: '#/definitions/ConflictErrorResponse'
+        '422':
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/UnprocessableErrorResponse'
+        '400':
+          description: Client Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: Add Label Project Resources
+  /resource-manager/project/label-value:
+    patch:
+      consumes:
+        - application/json
+      description: |-
+        Updates labels for an existing project. The request will be published
+        to a Pub/Sub topic that will trigger a GCP Cloud Function that will
+        apply the labels.
+
+        Please note:
+        - The endpoint only works for projects created with this framework.
+      operationId: update_label_value_project_resource_manager_project_label_value_patch
+      x-google-backend:
+          address: https://onecloud-fastapi-4edanfop6q-uk.a.run.app/resource-manager/project/label-value
+      security:
+            - api_key : []        
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/ProjectLabelsRequest'
+      produces:
+        - application/json
+      responses:
+        '202':
+          description: Successful Response
+          schema:
+            $ref: '#/definitions/Success202Response'
+        '409':
+          description: Conflict
+          schema:
+            $ref: '#/definitions/ConflictErrorResponse'
+        '422':
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/UnprocessableErrorResponse'
+        '400':
+          description: Client Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: Update Label Value Project
+  /resource-manager/routable-network:
+    post:
+      consumes:
+        - application/json
+      description: >-
+        Creates a routable network for an existing project in GCP. This endpoint
+        allocates the
+
+        necessary IP ranges in the IPAM and send a message to a Pub/Sub topic
+        which triggers
+
+        the orchestrator that will create the network. Once the network has been
+        successfully
+
+        created in GCP an email notification will be send to the requester.
+
+
+        Please note:
+
+        - The endpoint can only create a network for a project created with this
+        framework.
+
+        - If you have recently created a project, please wait to recieve an
+        email notification
+
+        indicating that the project was successfully created before calling this
+        endpoint.
+      operationId: create_routable_network_resource_manager_routable_network_post
+      x-google-backend:
+          address: https://onecloud-fastapi-4edanfop6q-uk.a.run.app/resource-manager/routable-network
+      security:
+            - api_key : []        
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/RoutableNetworkRequest'
+      produces:
+        - application/json
+      responses:
+        '202':
+          description: Successful Response
+          schema:
+            $ref: '#/definitions/Success202Response'
+        '409':
+          description: Conflict
+          schema:
+            $ref: '#/definitions/ConflictErrorResponse'
+        '422':
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/UnprocessableErrorResponse'
+        '400':
+          description: Client Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: Create Routable Network
+swagger: '2.0'
+x-components: {}
+
