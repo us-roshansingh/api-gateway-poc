@@ -76,7 +76,7 @@ jobs:
             # make file runnable, might not be necessary
              chmod +x "${GITHUB_WORKSPACE}/gcp-apigateway-build.sh"
             # Run the script for deployment 
-             bash -x ${GITHUB_WORKSPACE}/gcp-apigateway-build.sh ${{ env.STG_PROJECT_ID }} ${{ env.API_NAME-DEV }} ${GITHUB_WORKSPACE}/${{ env.CONFIG_FILE_STG }} ${{ env.API_GATEWAY_STG }} ${{ env.CONFIG_NAME_STG }}          
+             bash -x ${GITHUB_WORKSPACE}/gcp-apigateway-build.sh ${{ env.STG_PROJECT_ID }} ${{ env.API_NAME-STG }} ${GITHUB_WORKSPACE}/${{ env.CONFIG_FILE_STG }} ${{ env.API_GATEWAY_STG }} ${{ env.CONFIG_NAME_STG }}          
   Prd_deploy:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
@@ -96,6 +96,6 @@ jobs:
             # make file runnable, might not be necessary
              chmod +x "${GITHUB_WORKSPACE}/gcp-apigateway-build.sh"
             # Run the script for deployment 
-             bash -x ${GITHUB_WORKSPACE}/gcp-apigateway-build.sh ${{ env.PRD_PROJECT_ID }} ${{ env.API_NAME-DEV }} ${GITHUB_WORKSPACE}/${{ env.CONFIG_FILE_PRD }} ${{ env.API_GATEWAY_PRD }} ${{ env.CONFIG_NAME_PRD }}           
+             bash -x ${GITHUB_WORKSPACE}/gcp-apigateway-build.sh ${{ env.PRD_PROJECT_ID }} ${{ env.API_NAME-PRD }} ${GITHUB_WORKSPACE}/${{ env.CONFIG_FILE_PRD }} ${{ env.API_GATEWAY_PRD }} ${{ env.CONFIG_NAME_PRD }}           
 
              
