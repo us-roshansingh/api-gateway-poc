@@ -15,16 +15,18 @@ on:
   
 env:
   DEV_PROJECT_ID: provisionsowtestrrr # TODO: update Google Cloud project id
-  STAGE_PROJECT_ID:  test-project # TODO: update Google Cloud project id
-  PROD_PROJECT_ID:  test-project # TODO: update Google Cloud project id
+  STG_PROJECT_ID: onecloud-provision-stg # TODO: update Google Cloud project id
+  PRD_PROJECT_ID:  test-project # TODO: update Google Cloud project id
   API_NAME-DEV: fastapi # TODO: update Cloud Run service name
   CONFIG_FILE: new-config.yaml # TODO: update Cloud Run service region
+  APIGATEWAY_NAME: onecloud-api-gateway
+  CONFIG_NAME: onecloud-api-config
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   Dev_deploy:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/development'
     steps:
       - name: Checkout
         uses: 'actions/checkout@v3'
@@ -41,7 +43,46 @@ jobs:
             # make file runnable, might not be necessary
              chmod +x "${GITHUB_WORKSPACE}/gcp-apigateway-build.sh"
             # Run the script for deployment 
-             bash -x ${GITHUB_WORKSPACE}/gcp-apigateway-build.sh ${{ env.DEV_PROJECT_ID }} ${{ env.API_NAME-DEV }} ${GITHUB_WORKSPACE}/${{ env.CONFIG_FILE }}
-           
+             bash -x ${GITHUB_WORKSPACE}/gcp-apigateway-build.sh ${{ env.DEV_PROJECT_ID }} ${{ env.API_NAME-DEV }} ${GITHUB_WORKSPACE}/${{ env.CONFIG_FILE }} ${{ env.APIGATEWAY_NAME }} ${{ env.CONFIG_NAME }}
+  Stg_deploy:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/staging'
+    steps:
+      - name: Checkout
+        uses: 'actions/checkout@v3'
+#       NOTE: Alternative option - authentication via credentials json
+      - name: 'Google Auth'
+        id: 'auth'
+        uses: 'google-github-actions/auth@v0'
+        with:
+          credentials_json: '${{ secrets.GCP_CREDENTIALS_STG }}'
+
+      # Runs a set of commands using the runners shell
+      - name: Run a multi-line script
+        run: |
+            # make file runnable, might not be necessary
+             chmod +x "${GITHUB_WORKSPACE}/gcp-apigateway-build.sh"
+            # Run the script for deployment 
+             bash -x ${GITHUB_WORKSPACE}/gcp-apigateway-build.sh ${{ env.STG_PROJECT_ID }} ${{ env.API_NAME-DEV }} ${GITHUB_WORKSPACE}/${{ env.CONFIG_FILE }} ${{ env.APIGATEWAY_NAME }} ${{ env.CONFIG_NAME }}          
+  Prd_deploy:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout
+        uses: 'actions/checkout@v3'
+#       NOTE: Alternative option - authentication via credentials json
+      - name: 'Google Auth'
+        id: 'auth'
+        uses: 'google-github-actions/auth@v0'
+        with:
+          credentials_json: '${{ secrets.GCP_CREDENTIALS_PRD }}'
+
+      # Runs a set of commands using the runners shell
+      - name: Run a multi-line script
+        run: |
+            # make file runnable, might not be necessary
+             chmod +x "${GITHUB_WORKSPACE}/gcp-apigateway-build.sh"
+            # Run the script for deployment 
+             bash -x ${GITHUB_WORKSPACE}/gcp-apigateway-build.sh ${{ env.PRD_PROJECT_ID }} ${{ env.API_NAME-DEV }} ${GITHUB_WORKSPACE}/${{ env.CONFIG_FILE }} ${{ env.APIGATEWAY_NAME }} ${{ env.CONFIG_NAME }}           
 
              
