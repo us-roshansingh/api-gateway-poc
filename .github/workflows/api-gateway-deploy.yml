@@ -17,10 +17,18 @@ env:
   DEV_PROJECT_ID: provisionsowtestrrr # TODO: update Google Cloud project id
   STG_PROJECT_ID: onecloud-provision-stg # TODO: update Google Cloud project id
   PRD_PROJECT_ID:  test-project # TODO: update Google Cloud project id
-  API_NAME-DEV: fastapi # TODO: update Cloud Run service name
-  CONFIG_FILE: new-config.yaml # TODO: update Cloud Run service region
-  APIGATEWAY_NAME: onecloud-api-gateway
-  CONFIG_NAME: onecloud-api-config
+  API_NAME-DEV: fastapi-dev # TODO: update Cloud Run service name
+  API_NAME-STG: fastapi-stg # TODO: update Cloud Run service name
+  API_NAME-PRD: fastapi-prd # TODO: update Cloud Run service name
+  CONFIG_FILE_DEV: dev-config.yaml # TODO: update Cloud Run service region
+  CONFIG_FILE_STG: stg-config.yaml # TODO: update Cloud Run service region
+  CONFIG_FILE_PRD: prd-config.yaml # TODO: update Cloud Run service region  
+  API_GATEWAY_DEV: onecloud-api-gateway-dev
+  API_GATEWAY_STG: onecloud-api-gateway-stg
+  API_GATEWAY_PRD: onecloud-api-gateway-prd
+  CONFIG_NAME_DEV: onecloud-api-config-dev
+  CONFIG_NAME_STG: onecloud-api-config-stg
+  CONFIG_NAME_PRD: onecloud-api-config-prd
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -43,7 +51,7 @@ jobs:
             # make file runnable, might not be necessary
              chmod +x "${GITHUB_WORKSPACE}/gcp-apigateway-build.sh"
             # Run the script for deployment 
-             bash -x ${GITHUB_WORKSPACE}/gcp-apigateway-build.sh ${{ env.DEV_PROJECT_ID }} ${{ env.API_NAME-DEV }} ${GITHUB_WORKSPACE}/${{ env.CONFIG_FILE }} ${{ env.APIGATEWAY_NAME }} ${{ env.CONFIG_NAME }}
+             bash -x ${GITHUB_WORKSPACE}/gcp-apigateway-build.sh ${{ env.DEV_PROJECT_ID }} ${{ env.API_NAME-DEV }} ${GITHUB_WORKSPACE}/${{ env.CONFIG_FILE_DEV }} ${{ env.API_GATEWAY_DEV }} ${{ env.CONFIG_NAME_DEV }}
   Stg_deploy:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/staging'
@@ -63,7 +71,7 @@ jobs:
             # make file runnable, might not be necessary
              chmod +x "${GITHUB_WORKSPACE}/gcp-apigateway-build.sh"
             # Run the script for deployment 
-             bash -x ${GITHUB_WORKSPACE}/gcp-apigateway-build.sh ${{ env.STG_PROJECT_ID }} ${{ env.API_NAME-DEV }} ${GITHUB_WORKSPACE}/${{ env.CONFIG_FILE }} ${{ env.APIGATEWAY_NAME }} ${{ env.CONFIG_NAME }}          
+             bash -x ${GITHUB_WORKSPACE}/gcp-apigateway-build.sh ${{ env.STG_PROJECT_ID }} ${{ env.API_NAME-DEV }} ${GITHUB_WORKSPACE}/${{ env.CONFIG_FILE_STG }} ${{ env.API_GATEWAY_STG }} ${{ env.CONFIG_NAME_STG }}          
   Prd_deploy:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
@@ -83,6 +91,6 @@ jobs:
             # make file runnable, might not be necessary
              chmod +x "${GITHUB_WORKSPACE}/gcp-apigateway-build.sh"
             # Run the script for deployment 
-             bash -x ${GITHUB_WORKSPACE}/gcp-apigateway-build.sh ${{ env.PRD_PROJECT_ID }} ${{ env.API_NAME-DEV }} ${GITHUB_WORKSPACE}/${{ env.CONFIG_FILE }} ${{ env.APIGATEWAY_NAME }} ${{ env.CONFIG_NAME }}           
+             bash -x ${GITHUB_WORKSPACE}/gcp-apigateway-build.sh ${{ env.PRD_PROJECT_ID }} ${{ env.API_NAME-DEV }} ${GITHUB_WORKSPACE}/${{ env.CONFIG_FILE_PRD }} ${{ env.API_GATEWAY_PRD }} ${{ env.CONFIG_NAME_PRD }}           
 
              
