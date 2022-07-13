@@ -31,7 +31,7 @@ env:
   API_GATEWAY_STG: onecloud-api-gateway-stg
   API_GATEWAY_PRD: onecloud-api-gateway-prd
   # TODO: Configuration Name based on Enviroment(Dev,Stg,Prd)
-  CONFIG_NAME_DEV: onecloud-api-config-dev
+  CONFIG_NAME_DEV: onecloud-api-updt-dev
   CONFIG_NAME_STG: onecloud-api-config-stg
   CONFIG_NAME_PRD: onecloud-api-config-prd
 

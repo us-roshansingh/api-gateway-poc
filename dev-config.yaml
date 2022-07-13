@@ -1236,6 +1236,48 @@ paths:
           schema:
             $ref: '#/definitions/ErrorResponse'
       summary: Create Routable Network
+  /getprojectstatus:
+    post:
+      consumes:
+        - application/json
+      description: >-
+        Get the project status provisioned by new framework.
+
+      operationId: get_project_status
+      x-google-backend:
+          address: https://getprojectstatus-canlcqfcea-uk.a.run.app
+      security:
+            - api_key : []        
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/BaseLabelsRequest'
+      produces:
+        - application/json
+      responses:
+        '201':
+          description: Successful Response
+          schema:
+            $ref: '#/definitions/Success201Response'
+        '409':
+          description: Conflict
+          schema:
+            $ref: '#/definitions/ConflictErrorResponse'
+        '422':
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/UnprocessableErrorResponse'
+        '400':
+          description: Client Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: get project status dev 
 swagger: '2.0'
 x-components: {}
 

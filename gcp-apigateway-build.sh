@@ -18,11 +18,13 @@ gcloud services enable servicemanagement.googleapis.com
 gcloud services enable servicecontrol.googleapis.com
 gcloud services enable iap.googleapis.com
 
+sleep 5
+
 #Create the API gateway config by running the following command
 gcloud api-gateway api-configs create $CONFIG_NAME --api=$API_NAME --openapi-spec=$CONFIG_FILE --project=$PROJECT_ID
 
 #deploy the API config to a gateway, run the below command
-gcloud api-gateway gateways create $APIGATEWAY --api=$API_NAME --api-config=$CONFIG_NAME --location=us-east4 --project=$PROJECT_ID
+# gcloud api-gateway gateways create $APIGATEWAY --api=$API_NAME --api-config=$CONFIG_NAME --location=us-east4 --project=$PROJECT_ID
 
 #run the below commands to view details about the gateway
 gcloud api-gateway gateways describe $APIGATEWAY --location=us-east4 --project=$PROJECT_ID
@@ -30,3 +32,6 @@ gcloud api-gateway gateways describe $APIGATEWAY --location=us-east4 --project=$
 #Enable the created api in API & Service page
 # MANAGED_SERVICE_NAME=$(gcloud api-gateway apis describe $API_NAME --format="value(managedService)")
 # gcloud services enable $MANAGED_SERVICE_NAME
+
+#Update the config file and configuration in dev
+gcloud api-gateway gateways update $APIGATEWAY --api=$API_NAME --api-config=$CONFIG_NAME --location=us-east4 --project=$PROJECT_ID
