@@ -24,8 +24,8 @@ sleep 5
 gcloud api-gateway api-configs create $CONFIG_NAME --api=$API_NAME --openapi-spec=$CONFIG_FILE --project=$PROJECT_ID
 
 #deploy the API config to a gateway, run the below command
-gcloud api-gateway gateways create $APIGATEWAY --api=$API_NAME --api-config=$CONFIG_NAME --location=us-east4 --project=$PROJECT_ID
-
+#gcloud api-gateway gateways create $APIGATEWAY --api=$API_NAME --api-config=$CONFIG_NAME --location=us-east4 --project=$PROJECT_ID
+gcloud api-gateway gateways update $APIGATEWAY --api=$API_NAME --api-config=$CONFIG_NAME --location=us-east4 --project=$PROJECT_ID
 #run the below commands to view details about the gateway
 gcloud api-gateway gateways describe $APIGATEWAY --location=us-east4 --project=$PROJECT_ID
 

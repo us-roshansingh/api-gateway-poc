@@ -1235,7 +1235,7 @@ paths:
           description: Server Error
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Create Routable Network
+      summary: Create Routable Network   
 swagger: '2.0'
 x-components: {}
 

@@ -32,7 +32,7 @@ env:
   API_GATEWAY_PRD: onecloud-api-gateway-prd
   # TODO: Configuration Name based on Enviroment(Dev,Stg,Prd)
   CONFIG_NAME_DEV: onecloud-api-config-dev
-  CONFIG_NAME_STG: onecloud-api-config-stg
+  CONFIG_NAME_STG: onecloud-api-config-stg-updt
   CONFIG_NAME_PRD: onecloud-api-config-prd
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
