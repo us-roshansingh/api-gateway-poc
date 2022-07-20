@@ -18,6 +18,7 @@ gcloud services enable servicemanagement.googleapis.com
 gcloud services enable servicecontrol.googleapis.com
 gcloud services enable iap.googleapis.com
 
+sleep 5
 #Create the API gateway config by running the following command
 gcloud api-gateway api-configs create $CONFIG_NAME --api=$API_NAME --openapi-spec=$CONFIG_FILE --project=$PROJECT_ID
 
